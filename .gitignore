@@ -63,5 +63,6 @@ typings/
 .next
 
 config/db.js
+app/config/db.js
 
 .idea/
