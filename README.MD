@@ -1,4 +1,2 @@
-1) Install node & npm
-2) npm install
-3) install nodemon -g
-4) to Run test server nodemon --exec npm run dev
+<h1>Backend for cv front-ends using node.js</h1>
+
