@@ -11,6 +11,7 @@ import {mongoUrl} from "./config/db";
  */
 import AppRouters from "./app.routes";
 import UserRouters from "./components/user/user.routes";
+import CompanyRouters from "./components/company/company.routes";
 import SkillsRouters from "./components/skills/skills.routes";
 import SocialRouters from "./components/social_links/social_links.routes";
 import LanguagesRouters from "./components/languages/languages.routes";
@@ -88,6 +89,7 @@ class App {
         this.app.use('/skills', SkillsRouters);
         this.app.use('/socials', SocialRouters);
         this.app.use('/languages', LanguagesRouters);
+        this.app.use('/company', CompanyRouters);
 
     }
 

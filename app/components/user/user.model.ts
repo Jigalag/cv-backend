@@ -12,6 +12,10 @@ export const UserSchema = new Schema({
         type: String,
         required: 'Enter a last name'
     },
+    avatar: {
+        type: String,
+        required: 'Enter a last name'
+    },
     position:{
         type: String,
         required: 'Enter a position'
