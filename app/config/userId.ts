@@ -1,1 +1,1 @@
-export const myUserId = '5c178e057d6d37384361a2f8';
+export const MY_USER_ID = '5c178e057d6d37384361a2f8';

@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import {DefaultAPIClass} from "../api";
+import { DefaultAPIClass } from "../api";
 import { Company } from './company.model';
-import { Languages } from '../languages/languages.model';
-import { myUserId } from '../../config/userId';
-import {Users} from "../user/user.model";
+import { MY_USER_ID } from '../../config/userId';
+import { Users } from "../user/user.model";
 
 export class CompanyController extends DefaultAPIClass{
     createUserCompany = (req: Request, res: Response) => {
@@ -27,7 +26,7 @@ export class CompanyController extends DefaultAPIClass{
         });
     };
     getUserCompanies = (req: Request, res: Response) => {
-        Company.find({userId: req.params.userId}, (err, company) => {
+        Company.find({userId: req.params.id}, (err, company) => {
             if (err) {
                 res.status(500).send(this.errorObject("Server error. Please contact to administrator", 500));
                 return false;
@@ -41,7 +40,7 @@ export class CompanyController extends DefaultAPIClass{
         });
     };
     getMyCompanies = (req: Request, res: Response) => {
-        Company.find({userId: myUserId}, (err, company) => {
+        Company.find({userId: MY_USER_ID}, (err, company) => {
             if (err) {
                 res.status(500).send(this.errorObject("Server error. Please contact to administrator", 500));
                 return false;
@@ -55,35 +54,34 @@ export class CompanyController extends DefaultAPIClass{
         });
     };
     getCompany = (req: Request, res: Response) => {
-        Company.findOne({'isMy': true})
-            .populate({path: 'languages', model: Languages, select: 'title level'})
-            .exec((err, user) => {
+        Company.findById(req.params.id)
+            .exec((err, company) => {
             if (err) {
                 res.status(500).send(this.errorObject("Server error. Please contact to administrator", 500));
                 return false;
             } else {
-                if (!user){
+                if (!company){
                     res.status(404).send(this.errorObject("User not found", 404));
                     return false;
                 }
-                res.json(this.successObject(user));
+                res.json(this.successObject(company));
             }
         });
     };
 
     updateCompany = (req: Request, res: Response) => {
         Company.findById(req.params.id)
-            .exec((err, user) => {
+            .exec((err, company) => {
                 if (err) {
                     res.status(500).send(this.errorObject("Server error. Please contact to administrator", 500));
                     return false;
                 } else {
-                    if (!user){
+                    if (!company){
                         res.status(404).send(this.errorObject("User not found", 404));
                         return false;
                     }
-                    user = Object.assign(user, req.body);
-                    user.save((err, user) => {
+                    company = Object.assign(company, req.body);
+                    company.save((err, user) => {
                         if (err) {
                             res.status(500).send(this.errorObject(err, 500));
                             return false;
