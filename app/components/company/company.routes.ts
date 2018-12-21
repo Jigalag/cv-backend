@@ -12,14 +12,14 @@ export class CompanyRouters {
         this.init();
     }
 
-    public userController: CompanyController = new CompanyController();
+    public companyController: CompanyController = new CompanyController();
 
     init() {
-        this.router.post('/:id', this.userController.createUserCompany);
-        this.router.get('/user/:id', this.userController.getUserCompanies);
-        this.router.get('/my', this.userController.getMyCompanies);
-        this.router.get('/:id', this.userController.getCompany);
-        this.router.put('/:id', this.userController.updateCompany);
+        this.router.post('/:id', this.companyController.createUserCompany);
+        this.router.get('/user/:id', this.companyController.getUserCompanies);
+        this.router.get('/my', this.companyController.getMyCompanies);
+        this.router.get('/:id', this.companyController.getCompany);
+        this.router.put('/:id', this.companyController.updateCompany);
     }
 
 }

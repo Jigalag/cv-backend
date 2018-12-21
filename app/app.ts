@@ -15,6 +15,7 @@ import CompanyRouters from "./components/company/company.routes";
 import SkillsRouters from "./components/skills/skills.routes";
 import SocialRouters from "./components/social_links/social_links.routes";
 import LanguagesRouters from "./components/languages/languages.routes";
+import ContactRouters from "./components/contact/contact.routes";
 
 class App {
 
@@ -90,6 +91,7 @@ class App {
         this.app.use('/socials', SocialRouters);
         this.app.use('/languages', LanguagesRouters);
         this.app.use('/company', CompanyRouters);
+        this.app.use('/contact', ContactRouters);
 
     }
 
