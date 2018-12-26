@@ -16,6 +16,9 @@ import SkillsRouters from "./components/skills/skills.routes";
 import SocialRouters from "./components/social_links/social_links.routes";
 import LanguagesRouters from "./components/languages/languages.routes";
 import ContactRouters from "./components/contact/contact.routes";
+import FileRouters from "./components/files/file.routes";
+
+const fileUpload = require('express-fileupload');
 
 class App {
 
@@ -68,9 +71,13 @@ class App {
         this.app.all("/*", function(req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
-            res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+            res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
             return next();
         });
+
+        this.app.use(fileUpload({createParentPath: true}));
+
+        this.app.use('/app/uploads', express.static(__dirname + '/uploads'));
 
         /**
          * support application/x-www-form-urlencoded post data
@@ -92,6 +99,7 @@ class App {
         this.app.use('/languages', LanguagesRouters);
         this.app.use('/company', CompanyRouters);
         this.app.use('/contact', ContactRouters);
+        this.app.use('/file', FileRouters);
 
     }
 
