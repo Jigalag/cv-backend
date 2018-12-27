@@ -67,12 +67,12 @@ export class ContactController extends DefaultAPIClass{
                         return false;
                     }
                     contact = Object.assign(contact, req.body);
-                    contact.save((err, user) => {
+                    contact.save((err, contact) => {
                         if (err) {
                             res.status(500).send(this.errorObject(err, 500));
                             return false;
                         }
-                        res.status(201).send();
+                        res.json(this.successObject(contact));
                     });
                 }
             });

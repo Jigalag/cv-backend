@@ -81,12 +81,12 @@ export class CompanyController extends DefaultAPIClass{
                         return false;
                     }
                     company = Object.assign(company, req.body);
-                    company.save((err, user) => {
+                    company.save((err, company) => {
                         if (err) {
                             res.status(500).send(this.errorObject(err, 500));
                             return false;
                         }
-                        res.status(201).send();
+                        res.json(this.successObject(company));
                     });
                 }
             });
